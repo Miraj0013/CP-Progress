@@ -25,11 +25,9 @@ Following a structured 8-week study plan, moving topic by topic:
 Practicing daily using a mix of **CSES Problem Set** and **A2OJ Ladder** problems.
 
 ## Repository Structure
-CP-Progress/
-├── Sorting/
-├── Searching/
-├── CSES/
-└── README.md
+Sorting/ — sorting algorithm implementations
+Searching/ — searching algorithm implementations
+CSES/ — CSES Problem Set solutions
 ## Goal
 
 Steady, consistent improvement — moving from Pupil toward higher Codeforces ratings through daily structured practice.
