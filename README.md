@@ -29,7 +29,6 @@ Practicing daily using a mix of **CSES Problem Set** and **A2OJ Ladder** problem
 ```
 CP-Progress/
 ├── Sorting/
-├── Searching/
 ├── CSES/
 └── README.md
 ```
