@@ -1,0 +1,68 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  linkdin:https://www.linkedin.com/in/miraj13/
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define ub upper_bound
+#define lb lower_bound
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define lcm(x, y) ((1LL * (x) * (y)) / __gcd((x), (y)))
+ 
+using namespace std;
+const int N=100000;
+ 
+struct cstm
+{
+  int in,out,id;
+};
+ 
+int main(){
+  fast();
+  set<int>st;
+  map<int,stack<int>>mem;
+  int n;
+  cin>>n;
+  vector<cstm>room(n);
+  for (int i = 0; i < n; ++i)
+  {
+    int x,y;
+    cin>>x>>y;
+    room[i].in=x;
+    room[i].out=y;
+    room[i].id=i;
+  }
+  sort(room.begin(),room.end(),[](const cstm&a,const cstm&b){
+    if(a.in==b.in){
+      return a.out<b.out;
+    }
+    return a.in<b.in;
+  });
+ 
+  vector<int> ans(n);
+  int gt=0;
+  st.insert(0);
+  for(int i=0;i<n;i++){
+    auto it=st.lb(room[i].in);
+    it--;
+    if(*it!=0){
+      int j=mem[*it].top();
+      ans[room[i].id]=j;
+      mem[*it].pop();
+      mem[room[i].out].push(j);
+      st.insert(room[i].out);
+      if(mem[*it].empty())st.erase(it);
+    }else{
+      gt++;
+      mem[room[i].out].push(gt);
+      st.insert(room[i].out);
+      ans[room[i].id]=gt;
+    }
+  }
+  cout<<gt<<'\n';
+  for (auto i:ans)cout<<i<<' ';
+}
