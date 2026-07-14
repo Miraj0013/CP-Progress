@@ -1,0 +1,48 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  linkdin:https://www.linkedin.com/in/miraj13/
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define lcm(x, y) ((1LL * (x) * (y)) / __gcd((x), (y)))
+ 
+using namespace std;
+const int N=1000000009;
+ 
+ 
+int main(){
+  fast();
+  int n,q;
+  cin>>n>>q;
+  multiset<int, greater<int>> dark;
+  set<int>lite;
+  dark.insert(n);
+  lite.insert(0);
+  lite.insert(n);
+  while(q--){
+    int x;
+    cin>>x;
+    auto it=lite.upper_bound(x);
+    int j=*it;
+    it--;
+    int i=*it;
+    it=dark.find(j-i);
+    if(it != dark.end()){
+      dark.erase(it);
+    }
+    dark.insert((x-i));
+    dark.insert(j-x);
+    cout<<*dark.begin()<<' ';
+    //cout<<i<<' '<<j<<endl;
+    // for (auto i:dark)cout<<i<<' ';
+    // cout<<endl;
+    // dark.erase(dark.begin());
+    lite.insert(x);
+  }
+}
+ 
