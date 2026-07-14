@@ -1,0 +1,42 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  linkdin:https://www.linkedin.com/in/miraj13/
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define lcm(x, y) ((1LL * (x) * (y)) / __gcd((x), (y)))
+ 
+using namespace std;
+const int N=100000;
+ 
+ 
+int main(){
+  fast();
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0;i<n;i++)cin>>arr[i]; 
+  set<int>s;
+  int ans=0;
+  int j=0,i=0;
+  while(i < n)
+  {
+    if(s.find(arr[i]) != s.end()){
+      while(arr[j]!=arr[i]){
+        s.erase(arr[j]);
+        j++;
+      }
+      j++;
+ 
+    }else s.insert(arr[i]);
+    ans=max(ans,(i-j+1));
+    i++;
+  }
+  ans=max(ans,(i-j));
+  cout<<ans;
+}
