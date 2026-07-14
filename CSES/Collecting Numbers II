@@ -1,0 +1,58 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  linkdin:https://www.linkedin.com/in/miraj13/
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define lcm(x, y) ((1LL * (x) * (y)) / __gcd((x), (y)))
+ 
+using namespace std;
+const int N=100000;
+ 
+ 
+int main(){
+  fast();
+  int n,m;
+  cin>>n>>m;
+  vector<int>v(n);
+  for (int i = 0; i < n; ++i)cin>>v[i];
+  vector<pair<int,int>> arr(n+1);
+  arr[0].first=0;
+  arr[0].second=-1;
+  for (int i = 1; i <=n; ++i)
+  {
+    arr[i].first=v[i-1];
+    arr[i].second=i;
+  }
+  sort(arr.begin(),arr.end());
+  int cnt=1;
+  for (int i = 1; i <= n; ++i)
+  {
+    if(arr[i].second<arr[i-1].second)cnt++;
+  }
+  
+  while(m--){
+    int x,y,i,j;
+    cin>>i>>j;
+    if(i>j)swap(i,j);
+    x=v[i-1];
+    y=v[j-1];
+    
+    if(i<arr[x-1].second and arr[x-1].second<j)cnt--;
+    if(i<arr[x+1].second and arr[x+1].second<j)cnt++;
+    if(i<arr[y-1].second and arr[y-1].second<j)cnt++;
+    if(i<arr[y+1].second and arr[y+1].second<j)cnt--;
+ 
+    if(x==(y+1))cnt--;
+    if(y==(x+1))cnt++;
+ 
+    swap(v[i-1],v[j-1]);
+    swap(arr[x].second,arr[y].second);
+    cout<<cnt<<endl;
+  }
+}
