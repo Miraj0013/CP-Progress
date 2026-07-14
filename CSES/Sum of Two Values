@@ -1,0 +1,73 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  Contact:01909146781
+  Bangladesh Univerity Of Bussiness And Technology
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+ 
+using namespace std;
+ 
+struct values
+{
+  int first;
+  int second;
+  bool chk;
+};
+ 
+values finding(int arr[],int n,int k){
+  vector<int> temp(arr,arr+n);
+  sort(temp.begin(),temp.end());
+  int i=0,j=n-1;
+  int a,b;
+  bool chk=true;
+  while(i!=j){
+    if(temp[i]+temp[j]<k){
+      i++;
+    }else if(temp[i]+temp[j]>k){
+      j--;
+    }else{
+      a=temp[i];
+      b=temp[j];
+      chk=false;
+      break;
+    }
+  }
+  return {a,b,chk};
+}
+ 
+int main(){fast();
+  int n,k;
+  cin>>n>>k;
+  int arr[n];
+  for(int i=0;i<n;i++){
+    cin>>arr[i];
+  }
+  values found=finding(arr,n,k);
+  int a=found.first;
+  int b=found.second;
+  if(found.chk){
+    cout<<"IMPOSSIBLE";
+    return 0;
+  }
+  int ind_a=0,ind_b=0;
+  for(int i=0;i<n;i++){
+    if(arr[i]==a){
+      ind_a=i+1;
+      break;
+    }
+  }
+  for(int i=0;i<n;i++){
+    if(i==ind_a-1)continue;
+    if(arr[i]==b){
+      ind_b=i+1;
+      break;
+    }
+  }
+  cout<<ind_a<<' '<<ind_b;
+}
