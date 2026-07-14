@@ -1,0 +1,69 @@
+/*
+  IN THE NAME OF ALLAH
+  Author:S.M. Akhlakur Rahman Meraj
+  linkdin:https://www.linkedin.com/in/miraj13/
+*/
+#include<bits/stdc++.h>
+#define yes cout<<"YES"<<'\n'
+#define no cout<<"NO"<<'\n'
+#define pb push_back
+#define ll long long
+#define fast() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define lcm(x, y) ((1LL * (x) * (y)) / __gcd((x), (y)))
+ 
+using namespace std;
+const int N=100000;
+ 
+struct Interval
+{
+  int start;
+  int end;
+  int indx;
+ 
+};
+ 
+int main(){
+  fast();
+  int n;
+  cin>>n;
+  vector<Interval> arr(n);
+  for(int i=0;i<n;i++){
+    int s,e;
+    cin >> s >> e;
+    arr[i]={s,e,i};
+  }
+  vector<bool>A(n,0),B(n,0);
+  //start part 
+  sort(arr.begin(),arr.end(),[](const Interval&a,const Interval&b){
+    if(a.start==b.start and a.end==b.end)return (a.indx<b.indx);
+    else if(a.end==b.end)return (a.start>b.start);
+    return (a.end<b.end);
+  });
+  int mx=INT_MIN;
+  for (int i = 0; i < n; ++i)
+  {
+    if(mx!=INT_MIN and arr[i].start<=mx)A[arr[i].indx]=1;
+    mx=max(mx,arr[i].start);
+  }
+  //2nd part
+  sort(arr.begin(),arr.end(),[](const Interval&a,const Interval&b){
+    if(a.start==b.start and a.end==b.end)return (a.indx<b.indx);
+    else if(a.start==b.start) return (a.end>b.end);
+    return (a.start<b.start);
+  }); 
+  mx=INT_MIN;
+  for (int i = 0; i < n; ++i)
+  {
+    if(mx != INT_MIN and arr[i].end<=mx)B[arr[i].indx]=1;
+    mx=max(mx,arr[i].end);
+  }
+  for (auto i:A)
+  {
+    cout<<i<<' ';
+  }
+  cout<<'\n';
+  for (auto i:B)
+  {
+    cout<<i<<' ';
+  }
+}
